@@ -261,7 +261,6 @@ export const en = {
     distributorImageAlt: 'Panelised facade rising against a clear sky',
     roleLabel: 'Role',
     roleValue: 'General Distributor, Singapore',
-    addressLabel: 'Address',
     phoneLabel: 'Phone',
     emailLabel: 'Email',
   },
@@ -274,7 +273,6 @@ export const en = {
     heroImageAlt: 'Curved architectural facade with banded shadows',
     phoneLabel: 'Phone',
     emailLabel: 'Email',
-    addressLabel: 'Address',
     manufacturerLabel: 'Manufacturer',
     sampleTitle: 'Ask for a physical sample',
     sampleBody:

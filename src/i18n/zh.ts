@@ -262,7 +262,6 @@ export const zh: Dictionary = {
     distributorImageAlt: '晴空下高耸的板材幕墙',
     roleLabel: '角色',
     roleValue: '新加坡总代理',
-    addressLabel: '地址',
     phoneLabel: '电话',
     emailLabel: '邮箱',
   },
@@ -275,7 +274,6 @@ export const zh: Dictionary = {
     heroImageAlt: '带有条状阴影的弧形建筑立面',
     phoneLabel: '电话',
     emailLabel: '邮箱',
-    addressLabel: '地址',
     manufacturerLabel: '生产商',
     sampleTitle: '索取实物样品',
     sampleBody:

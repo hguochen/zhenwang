@@ -46,11 +46,6 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
             <h2 className="eyebrow text-ink-400">{t.common.generalDistributor}</h2>
             <address className="mt-5 space-y-3 text-sm leading-relaxed not-italic">
               <p className="font-semibold tracking-wide text-paper">{t.brand.legalName}</p>
-              <p className="text-ink-300">
-                {site.address.line1}
-                <br />
-                {site.address.line2}
-              </p>
               <p>
                 <a href={`tel:${site.phoneHref}`} className="transition-colors hover:text-gold-300">
                   {site.phone}

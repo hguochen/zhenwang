@@ -20,10 +20,9 @@ export const site = {
   phone: '+65 8011 3598',
   phoneHref: '+6580113598',
   email: 'shuzhen@zhenwang.org',
-  address: {
-    line1: '2 Tao Ching Road, #16-01 Lake Life',
-    line2: 'Singapore 618721',
-  },
+  // No postal address by choice. Phone and email are the contact routes; if a
+  // street address is ever wanted back it needs adding to the footer, the
+  // contact page and the about page, plus an `addressLabel` in both locales.
   manufacturerFounded: 1988,
 };
 

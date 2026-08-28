@@ -121,14 +121,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <dd className="text-sm text-ink-700">{t.about.roleValue}</dd>
               </div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
-                <dt className="eyebrow text-ink-400">{t.about.addressLabel}</dt>
-                <dd className="text-right text-sm text-ink-700">
-                  {site.address.line1}
-                  <br />
-                  {site.address.line2}
-                </dd>
-              </div>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
                 <dt className="eyebrow text-ink-400">{t.about.phoneLabel}</dt>
                 <dd className="text-sm text-ink-700">
                   <a href={`tel:${site.phoneHref}`} className="hover:text-gold-600">

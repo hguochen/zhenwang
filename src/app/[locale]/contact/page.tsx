@@ -63,15 +63,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               </div>
 
               <div className="border-t border-ink-900/12 pt-5">
-                <h3 className="eyebrow text-ink-400">{t.contact.addressLabel}</h3>
-                <p className="mt-3 text-base leading-relaxed text-ink-600">
-                  {site.address.line1}
-                  <br />
-                  {site.address.line2}
-                </p>
-              </div>
-
-              <div className="border-t border-ink-900/12 pt-5">
                 <h3 className="eyebrow text-ink-400">{t.contact.manufacturerLabel}</h3>
                 <p className="mt-3 text-base leading-relaxed text-ink-600">
                   {t.brand.manufacturerName}
