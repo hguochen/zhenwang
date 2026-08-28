@@ -69,7 +69,7 @@ export const en = {
     contact: {
       title: 'Contact',
       description:
-        'Contact ZHEN WANG CONSTRUCTION PTE LTD, the Singapore general distributor for MinewayTech Rock Mineral Panel. Phone +65 9457 8218 or email shuzhen@zhenwang.org.',
+        'Contact ZHEN WANG CONSTRUCTION PTE LTD, the Singapore general distributor for MinewayTech Rock Mineral Panel. Phone +65 8011 3598 or email shuzhen@zhenwang.org.',
     },
   },
 

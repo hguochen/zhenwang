@@ -17,8 +17,8 @@ export const site = {
   // domain at the apex this becomes just 'https://example.com' — and
   // NEXT_PUBLIC_BASE_PATH in the deploy workflow has to be cleared to match.
   url: 'https://hguochen.github.io/zhenwang',
-  phone: '+65 9457 8218',
-  phoneHref: '+6594578218',
+  phone: '+65 8011 3598',
+  phoneHref: '+6580113598',
   email: 'shuzhen@zhenwang.org',
   address: {
     line1: '2 Tao Ching Road, #16-01 Lake Life',
