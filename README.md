@@ -69,6 +69,18 @@ Published to GitHub Pages at **https://hguochen.github.io/zhenwang/** by
 `.github/workflows/deploy.yml` on every push to `main`. The workflow lints, type-checks, runs
 `next build` (which emits a static export to `out/`) and uploads that as the Pages artifact.
 
+### One-time setup
+
+The workflow cannot do these two itself — the token it runs with is not allowed to create a Pages
+site, and asking it to (`configure-pages` with `enablement: true`) fails the run with
+`Resource not accessible by integration`.
+
+1. **The repository must be public**, or the account on GitHub Pro. Pages is not available for
+   private repositories on GitHub Free, so the Pages API refuses to create the site at all.
+2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
+
+Then re-run the workflow from the Actions tab. Every push to `main` deploys from that point on.
+
 Two things make the static export work, and both are easy to break:
 
 - **`NEXT_PUBLIC_BASE_PATH=/zhenwang`** is set only in the workflow, so dev and the Lightsprint
