@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MinewayTech">
+  <rect width="64" height="64" fill="#16140f" />
+  <path d="M8 8h33L20 56H8V8Z" fill="#ddaf35" />
+  <path d="M41 8 20 56h36V8H41Z" fill="#16140f" />
+  <path d="M8 34l18-4 12 26" fill="none" stroke="#16140f" stroke-width="3" />
+</svg>

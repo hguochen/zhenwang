@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+
+/*
+ * Brand system lifted from the MinewayTech / ZhenWang product brochure:
+ * gold on charcoal ink over a warm cream paper, serif display + sans body.
+ */
+@theme {
+  --color-gold-50: #fdf8ea;
+  --color-gold-100: #f8ecc6;
+  --color-gold-200: #f0da95;
+  --color-gold-300: #e7c563;
+  --color-gold-400: #ddaf35;
+  --color-gold-500: #d19f21;
+  --color-gold-600: #b0801a;
+  --color-gold-700: #855f17;
+  --color-gold-800: #5c421a;
+  --color-gold-900: #3b2b14;
+
+  --color-ink-50: #f6f5f2;
+  --color-ink-100: #e8e6df;
+  --color-ink-200: #cfcbbf;
+  --color-ink-300: #a8a294;
+  --color-ink-400: #7d766a;
+  --color-ink-500: #5a544a;
+  --color-ink-600: #423d36;
+  --color-ink-700: #332f29;
+  --color-ink-800: #23201c;
+  --color-ink-900: #16140f;
+
+  --color-paper: #f3f3ea;
+  --color-paper-dim: #eae9de;
+
+  --font-display: var(--font-display), Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink-800);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Cormorant Garamond defaults to old-style figures, which turn "10" into
+   * something closer to "IO" at display sizes. Specification numbers have to
+   * read unambiguously, so force lining figures wherever the serif is used.
+   */
+  .font-display {
+    font-variant-numeric: lining-nums;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-300);
+    color: var(--color-ink-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Wide letter-spaced label used throughout the brochure above headings. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  /* The brochure cover's angular shard, softened enough to hold a photograph. */
+  .shard {
+    clip-path: polygon(0 7%, 100% 0, 100% 90%, 0 100%);
+  }
+
+  .shard-alt {
+    clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 82%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
