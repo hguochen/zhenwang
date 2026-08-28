@@ -69,17 +69,21 @@ Published to GitHub Pages at **https://hguochen.github.io/zhenwang/** by
 `.github/workflows/deploy.yml` on every push to `main`. The workflow lints, type-checks, runs
 `next build` (which emits a static export to `out/`) and uploads that as the Pages artifact.
 
-### Repository visibility is load-bearing
+### One-time setup
 
-**This repository has to stay public.** Pages is not offered for private repositories on GitHub
-Free, and the failure is indirect enough to cost an afternoon: `configure-pages` reports
-`Create Pages site failed. Error: Resource not accessible by integration`, which reads like a
-token-permission problem and is actually a plan limit. If the repo is ever made private again, the
-deploy stops with that message.
+**Settings → Pages → Build and deployment → Source: GitHub Actions.**
 
-Given a public repo, `configure-pages` creates the Pages site itself on the first run, so there is
-no manual setup. Should it ever fail anyway, switch it on by hand at **Settings → Pages → Build and
-deployment → Source: GitHub Actions** and re-run.
+The workflow cannot do this for you. `configure-pages` has an `enablement: true` option that looks
+like it should, but `GITHUB_TOKEN` is a GitHub App token and the Pages API will not let one create
+a site — it answers `Create Pages site failed. Error: Resource not accessible by integration`,
+whatever scopes the workflow declares. That was tried both while this repo was private and after it
+was made public; same failure. Until the site exists, `configure-pages` also fails with
+`Get Pages site failed. Error: Not Found`, so the first green run is the one after you flip the
+setting.
+
+**The repository also has to stay public**, separately from the above. Pages is not offered for
+private repositories on GitHub Free, so making it private again would break the deploy even with
+Pages configured.
 
 Two things make the static export work, and both are easy to break:
 
