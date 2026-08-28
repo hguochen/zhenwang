@@ -16,7 +16,11 @@ export const site = {
   tagline: 'Redefining Panels with the Power of Stone',
   description:
     'ZHEN WANG CONSTRUCTION PTE LTD is the Singapore general distributor for MinewayTech Rock Mineral Panel — a non-combustible A2-grade mineral fiber inorganic density panel with E0 formaldehyde emission and excellent water resistance.',
-  url: 'https://zhenwang-rmp.example.com',
+  // Canonical origin + base path. GitHub Pages serves a project repo under
+  // /<repo>, so the path segment is part of the site's identity. On a custom
+  // domain at the apex this becomes just 'https://example.com' — and
+  // NEXT_PUBLIC_BASE_PATH in the deploy workflow has to be cleared to match.
+  url: 'https://hguochen.github.io/zhenwang',
   role: 'General Distributor',
   phone: '+65 9457 8218',
   phoneHref: '+6594578218',
@@ -32,6 +36,21 @@ export const site = {
     location: 'Shanxi, China',
   },
 } as const;
+
+/**
+ * Absolute URL for a route.
+ *
+ * Deliberately string concatenation rather than `new URL(path, site.url)`:
+ * an absolute path resets the base's path, so `new URL('/product', ...)` would
+ * silently drop the `/zhenwang` base path and emit canonical URLs that 404.
+ * The trailing slash matches `trailingSlash: true` in next.config.ts.
+ */
+export function absoluteUrl(path: string): string {
+  const base = site.url.replace(/\/$/, '');
+  if (path === '/') return `${base}/`;
+  const clean = `/${path.replace(/^\/+|\/+$/g, '')}`;
+  return `${base}${clean}/`;
+}
 
 export const nav = [
   { href: '/', label: 'Home' },

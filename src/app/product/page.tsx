@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { Img } from '@/components/Img';
 import { CtaBand, PageHero, SectionHeading } from '@/components/ui';
 import { fireScale, finishes, processingAdvantages, specifications, site } from '@/lib/site';
 
@@ -159,7 +159,7 @@ export default function ProductPage() {
           </div>
 
           <div className="relative aspect-4/3 overflow-hidden">
-            <Image
+            <Img
               src="/img/lava.jpg"
               alt="Molten lava crusting over, evoking the 1450 °C melt the panel is made from"
               fill
@@ -196,7 +196,7 @@ export default function ProductPage() {
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-20">
           <div className="relative aspect-3/4 overflow-hidden">
-            <Image
+            <Img
               src="/img/saw-cut.jpg"
               alt="Hand saw cutting cleanly through a gold-faced mineral fibre panel"
               fill

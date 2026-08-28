@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Img } from './Img';
 import { useState } from 'react';
 import { nav, site } from '@/lib/site';
 
@@ -14,7 +14,7 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-ink-900/10 bg-paper/90 backdrop-blur-md">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
         <Link href="/" className="flex shrink-0 items-center" aria-label={`${site.brand} home`}>
-          <Image
+          <Img
             src="/img/mineway-logo.png"
             alt={`${site.brand} — Mineral Fiber Panel`}
             width={850}

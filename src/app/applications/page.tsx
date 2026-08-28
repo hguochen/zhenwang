@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { Img } from '@/components/Img';
 import { CtaBand, PageHero, SectionHeading } from '@/components/ui';
 import { interiorApplications, publicApplications } from '@/lib/site';
 
@@ -30,7 +30,7 @@ export default function ApplicationsPage() {
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-stretch">
           <div className="relative min-h-80 overflow-hidden">
-            <Image
+            <Img
               src="/img/interior-living.jpg"
               alt="Contemporary lounge with dark RMP wall panelling, full-height cabinet fronts and timber-look flooring"
               fill
@@ -67,7 +67,7 @@ export default function ApplicationsPage() {
             {publicApplications.map((item) => (
               <li key={item.title} className="group bg-paper">
                 <div className="relative aspect-16/10 overflow-hidden">
-                  <Image
+                  <Img
                     src={item.image}
                     alt={`${item.title} interior finished with mineral fibre panels`}
                     fill
@@ -89,7 +89,7 @@ export default function ApplicationsPage() {
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="relative aspect-4/3 overflow-hidden lg:order-last">
-            <Image
+            <Img
               src="/img/facade-timber.jpg"
               alt="Timber-clad contemporary house lit from within at dusk"
               fill

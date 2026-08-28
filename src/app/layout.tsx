@@ -50,9 +50,9 @@ export const metadata: Metadata = {
     title: `${site.tagline} | ${site.brand} ${site.product}`,
     description: site.description,
   },
-  icons: {
-    icon: '/favicon.svg',
-  },
+  // The favicon comes from src/app/icon.svg via Next's file convention, which
+  // prefixes the base path for us. A hardcoded '/favicon.svg' here would 404
+  // on GitHub Pages, where the site is served under /zhenwang.
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -14,10 +14,13 @@ npm run dev        # http://localhost:3000
 | Script              | What it does                     |
 | ------------------- | -------------------------------- |
 | `npm run dev`       | Dev server on `0.0.0.0:3000`     |
-| `npm run build`     | Production build                 |
-| `npm run start`     | Serve the production build       |
+| `npm run build`     | Static export into `out/`        |
 | `npm run lint`      | ESLint (`eslint-config-next`)    |
 | `npm run typecheck` | `tsc --noEmit`                   |
+
+There is no `start` script: `output: 'export'` produces plain files, so `next start` does not
+apply. To check a build locally, serve `out/` with any static server — but note that the export is
+built for a `/zhenwang` base path, so serve it from a directory of that name.
 
 ## Stack
 
@@ -60,11 +63,34 @@ Every claim on the site is transcribed from the two source brochures supplied by
 invented number is a liability. The photography and the MinewayTech logo in `public/img/` were
 extracted from the same product brochure.
 
+## Deployment
+
+Published to GitHub Pages at **https://hguochen.github.io/zhenwang/** by
+`.github/workflows/deploy.yml` on every push to `main`. The workflow lints, type-checks, runs
+`next build` (which emits a static export to `out/`) and uploads that as the Pages artifact.
+
+Two things make the static export work, and both are easy to break:
+
+- **`NEXT_PUBLIC_BASE_PATH=/zhenwang`** is set only in the workflow, so dev and the Lightsprint
+  preview keep serving from `/`. It feeds `basePath` in `next.config.ts`.
+- **`src/components/Img.tsx`** wraps `next/image` and applies that prefix by hand. `images.unoptimized`
+  — which a static host requires — makes `next/image` emit the raw `src`, skipping the basePath it
+  applies everywhere else, so plain `<Image src="/img/…">` would 404 under `/zhenwang`. Use `Img`,
+  not `Image`, for anything in `public/`.
+
+`public/.nojekyll` stops Pages' Jekyll pass from discarding the `_next/` directory. `site.url` in
+`src/lib/site.ts` is the canonical origin *including* the base path — `absoluteUrl()` builds on it
+by concatenation, because `new URL('/product', base)` would silently drop that path segment.
+
+### Moving to a custom domain
+
+Three changes, all of which must land together: clear `NEXT_PUBLIC_BASE_PATH` in the workflow, set
+`site.url` to the new origin, and add the domain in the repo's Pages settings (which writes a
+`CNAME`).
+
 ## Notes
 
 - The enquiry form has no backend. It builds a pre-filled `mailto:` to the distributor, so the
   visitor sends the enquiry from their own client and keeps a copy. Wiring it to a real endpoint
   means replacing `handleSubmit` in `EnquiryForm.tsx`.
-- `site.url` in `src/lib/site.ts` is a placeholder. Set it to the real domain before launch —
-  it drives `metadataBase`, `sitemap.xml` and `robots.txt`.
 - The site is English-only; the distributor's market is Singapore.

@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import { Img } from './Img';
 import type { ReactNode } from 'react';
 
 /** Eyebrow + serif heading + gold rule, the brochure's standard section opener. */
@@ -62,7 +62,7 @@ export function PageHero({
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-ink-900">
-      <Image
+      <Img
         src={image}
         alt={imageAlt}
         fill

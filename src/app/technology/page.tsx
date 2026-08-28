@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { Img } from '@/components/Img';
 import { CtaBand, PageHero, SectionHeading } from '@/components/ui';
 import { accreditation, intellectualProperty, processStages } from '@/lib/site';
 
@@ -106,7 +106,7 @@ export default function TechnologyPage() {
 
           <div>
             <div className="relative aspect-4/3 overflow-hidden">
-              <Image
+              <Img
                 src="/img/facade-curved.jpg"
                 alt="Curved white architectural facade with deep horizontal shadow bands"
                 fill

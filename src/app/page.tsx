@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Img } from '@/components/Img';
 import Link from 'next/link';
 import { AdvantageIcon } from '@/components/AdvantageIcon';
 import { CtaBand, SectionHeading, Stat } from '@/components/ui';
@@ -64,7 +64,7 @@ export default function HomePage() {
               className="shard-alt absolute -top-5 -right-4 hidden h-full w-3/4 bg-ink-800/25 sm:block"
             />
             <div className="shard relative aspect-4/3 overflow-hidden">
-              <Image
+              <Img
                 src="/img/interior-living.jpg"
                 alt="Dark contemporary living room lined with Rock Mineral Panel wall and cabinet surfaces"
                 fill
@@ -100,7 +100,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div className="relative aspect-4/5 overflow-hidden sm:aspect-4/3 lg:aspect-4/5">
-            <Image
+            <Img
               src="/img/rock-strata.jpg"
               alt="Close-up of layered basalt rock strata, the raw feedstock for mineral fibre"
               fill
@@ -194,7 +194,7 @@ export default function HomePage() {
 
       {/* Enterprise achievements. */}
       <section className="relative isolate overflow-hidden bg-ink-900">
-        <Image
+        <Img
           src="/img/facade-timber.jpg"
           alt=""
           aria-hidden="true"
@@ -229,7 +229,7 @@ export default function HomePage() {
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
           <div data-testid="home-interior-visual" className="relative aspect-16/10 overflow-hidden">
-            <Image
+            <Img
               src="/img/interior-living.jpg"
               alt="Interior lounge with RMP wall panelling, cabinet fronts and flooring"
               fill
@@ -258,7 +258,7 @@ export default function HomePage() {
         <ul data-testid="home-public-spaces" className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {publicApplications.map((item) => (
             <li key={item.title} className="group relative aspect-4/5 overflow-hidden">
-              <Image
+              <Img
                 src={item.image}
                 alt={`${item.title} interior finished with mineral fibre panels`}
                 fill

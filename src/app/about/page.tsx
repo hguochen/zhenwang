@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { Img } from '@/components/Img';
 import Link from 'next/link';
 import { CtaBand, PageHero, SectionHeading, Stat } from '@/components/ui';
 import { accreditation, site } from '@/lib/site';
@@ -80,7 +80,7 @@ export default function AboutPage() {
 
       {/* Accreditation band. */}
       <section className="relative isolate overflow-hidden bg-ink-900">
-        <Image
+        <Img
           src="/img/ore.jpg"
           alt=""
           aria-hidden="true"
@@ -109,7 +109,7 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-20">
           <div className="relative aspect-4/3 overflow-hidden">
-            <Image
+            <Img
               src="/img/facade-cladding.jpg"
               alt="Panelised facade rising against a clear sky"
               fill

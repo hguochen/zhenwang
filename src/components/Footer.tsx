@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import { Img } from './Img';
 import { headlineClaims, nav, site } from '@/lib/site';
 
 export function Footer() {
@@ -8,7 +8,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           <div>
-            <Image
+            <Img
               src="/img/mineway-logo-light.png"
               alt={`${site.brand} — Mineral Fiber Panel`}
               width={850}
