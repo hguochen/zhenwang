@@ -32,36 +32,64 @@ every page is statically renderable.
 ```
 src/
   app/
-    layout.tsx          shared shell: fonts, metadata, header, footer
-    page.tsx            /              home
-    product/            /product       specification, fire performance, finishes
-    technology/         /technology    manufacturing process and patents
-    applications/       /applications  interior and public space scenarios
-    about/              /about         manufacturer and distributor profiles
-    contact/            /contact       contact details and enquiry form
-    sitemap.ts          /sitemap.xml
+    [locale]/           the whole site, once per language
+      layout.tsx        root layout: <html lang>, fonts, header, footer
+      page.tsx          /en          /zh          home
+      product/          /en/product  /zh/product  specification, fire, finishes
+      technology/       …            …            process and patents
+      applications/     …            …            interior and public scenarios
+      about/            …            …            manufacturer and distributor
+      contact/          …            …            contact details and enquiry form
+      not-found.tsx
+    sitemap.ts          /sitemap.xml (both locales, with hreflang alternates)
     robots.ts           /robots.txt
+    icon.svg            favicon, via Next's file convention
   components/
     Header.tsx          sticky nav with mobile drawer
+    LocaleToggle.tsx    EN / 中文 switch, top right
     Footer.tsx
     ui.tsx              SectionHeading, PageHero, CtaBand, Stat
     AdvantageIcon.tsx   hexagon-framed line icons
     EnquiryForm.tsx     composes a pre-filled mailto to the distributor
-  lib/
-    site.ts             all company details and product facts
-public/img/             photography and logos extracted from the brochures
+    Img.tsx             next/image + basePath (see Deployment)
+  i18n/
+    config.ts           locales, tags, localePath()
+    en.ts               English copy — its shape defines the Dictionary type
+    zh.ts               Simplified Chinese copy
+  lib/site.ts           locale-invariant facts, image paths, ids
+  fonts/                subsetted Noto CJK SC (OFL, LICENSE included)
+public/
+  img/                  photography and logos extracted from the brochures
+  index.html            hand-written root: sends / to /en or /zh
 ```
 
-## Content
+## Content and languages
 
-**`src/lib/site.ts` is the single source of truth** for company details, specification figures,
-advantages, process stages and applications. Change a fact there and it updates everywhere.
+Copy lives in **`src/i18n/en.ts` and `src/i18n/zh.ts`**; everything that reads the same in both
+languages — phone, email, address, image paths — is in **`src/lib/site.ts`**.
 
-Every claim on the site is transcribed from the two source brochures supplied by ZhenWang:
+`en.ts` is the reference: its shape defines the `Dictionary` type, so a key missing from `zh.ts`
+is a type error rather than `undefined` on a live page. Add a string to `en.ts` first, then
+`npm run typecheck` will tell you exactly what Chinese is missing.
+
+Every claim is transcribed from the two source brochures supplied by ZhenWang:
 `Mineral fiber pannel_en_zhenwang.pdf` (product) and `生产商简介.pdf` (manufacturer profile).
-**Do not add figures that are not in those documents** — the site is used by specifiers, and an
+**Do not add figures that are not in those documents** — the site is read by specifiers, and an
 invented number is a liability. The photography and the MinewayTech logo in `public/img/` were
 extracted from the same product brochure.
+
+Two things about the Chinese worth knowing before editing it:
+
+- **`ZHEN WANG CONSTRUCTION PTE LTD` is deliberately left in English.** It is a registered
+  Singapore entity and neither brochure gives a Chinese name; inventing one would put a company
+  name on the site that exists nowhere else.
+- **The plant size differs between the two brochures.** English says "1000+ acres", Chinese says
+  千亩 (~165 acres). Each locale follows its own source rather than one being silently picked.
+  Worth resolving with the client.
+
+The Chinese was written against the client's own terminology (岩矿板, 智造工厂, 循环经济,
+交城义望铁合金有限责任公司) but has **not been reviewed by a native speaker** — worth doing before
+it is promoted, particularly the technical claims.
 
 ## Deployment
 
@@ -97,6 +125,33 @@ Two things make the static export work, and both are easy to break:
 `public/.nojekyll` stops Pages' Jekyll pass from discarding the `_next/` directory. `site.url` in
 `src/lib/site.ts` is the canonical origin *including* the base path — `absoluteUrl()` builds on it
 by concatenation, because `new URL('/product', base)` would silently drop that path segment.
+
+The site root is `public/index.html`, a hand-written page that sends visitors to `/en/` or `/zh/`
+depending on their browser language. It is not a Next route because `app/[locale]/layout.tsx` is
+the root layout, and adding `app/page.tsx` would need a second root layout for six lines of
+redirect. **`/` therefore 404s under `next dev`** — only the export has it. Use `/en/` locally.
+
+### Chinese typography
+
+Chinese is served by Noto CJK SC, subsetted to the ~715 glyphs the copy actually uses: ~100 KB a
+face instead of 8 MB, self-hosted, wired up in `[locale]/layout.tsx`. Their `unicode-range` is
+CJK-only and `preload` is off, so **an English visitor downloads none of it**; shared punctuation
+(— " … × µ Φ) stays with Inter and Cormorant precisely so it cannot pull the CJK files in.
+
+Do not swap this for a system font stack or Google Fonts. A system stack renders tofu boxes on any
+device without a CJK face — which included the build agent's own headless Chromium — and Google
+Fonts is unreachable from mainland China, so it fails for part of this audience.
+
+If the Chinese copy gains characters outside the current subset they will render as tofu. Re-cut
+the subset after any substantial edit:
+
+```bash
+pip install "fonttools[woff]" brotli
+# collect the glyphs used, then for each face in src/fonts/:
+pyftsubset NotoSansSC-Regular.otf --text-file=charset.txt \
+  --output-file=src/fonts/NotoSansSC-Regular-subset.woff2 \
+  --flavor=woff2 --layout-features='' --no-hinting --desubroutinize
+```
 
 ### Moving to a custom domain
 

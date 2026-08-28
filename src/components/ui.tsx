@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { Img } from './Img';
 import type { ReactNode } from 'react';
+import { type Dictionary, localePath, type Locale } from '@/i18n';
+import { Img } from './Img';
 
 /** Eyebrow + serif heading + gold rule, the brochure's standard section opener. */
 export function SectionHeading({
@@ -88,9 +89,14 @@ export function PageHero({
 
 /** Closing call-to-action band, reused at the foot of every page. */
 export function CtaBand({
-  title = 'Specifying Rock Mineral Panel on a project?',
-  body = 'Send us the drawings, the fire requirement and the finish you have in mind. We will come back with panel sizes, finishes and lead times for Singapore delivery.',
+  locale,
+  t,
+  title,
+  body,
 }: {
+  locale: Locale;
+  t: Dictionary;
+  /** Page-specific override; falls back to the shared closing message. */
   title?: string;
   body?: string;
 }) {
@@ -99,22 +105,22 @@ export function CtaBand({
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 sm:py-20 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
           <h2 className="font-display text-3xl leading-tight tracking-tight text-ink-900 sm:text-4xl">
-            {title}
+            {title ?? t.cta.title}
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-ink-800/85">{body}</p>
+          <p className="mt-5 text-base leading-relaxed text-ink-800/85">{body ?? t.cta.body}</p>
         </div>
         <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
           <Link
-            href="/contact"
+            href={localePath('/contact', locale)}
             className="bg-ink-900 px-7 py-3.5 text-center text-sm font-semibold tracking-wide text-paper transition-colors hover:bg-ink-700"
           >
-            Contact ZhenWang
+            {t.common.contactZhenWang}
           </Link>
           <Link
-            href="/product"
+            href={localePath('/product', locale)}
             className="border border-ink-900/30 px-7 py-3.5 text-center text-sm font-semibold tracking-wide text-ink-900 transition-colors hover:border-ink-900 hover:bg-ink-900/5"
           >
-            Product specification
+            {t.common.productSpecification}
           </Link>
         </div>
       </div>

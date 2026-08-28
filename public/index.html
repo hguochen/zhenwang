@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MinewayTech Rock Mineral Panel | ZHEN WANG CONSTRUCTION PTE LTD</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://hguochen.github.io/zhenwang/en/" />
+    <!--
+      The site root only exists to hand the visitor to a language. It is a
+      hand-written file rather than a Next route because app/[locale]/layout.tsx
+      is the root layout — adding a page at app/page.tsx would need a second
+      root layout for the sake of six lines of redirect.
+
+      Meta refresh first so it works without JavaScript; the script below runs
+      sooner and picks Chinese for a Chinese-preferring browser.
+    -->
+    <meta http-equiv="refresh" content="0; url=./en/" />
+    <script>
+      (function () {
+        var wantsChinese = (navigator.languages || [navigator.language || 'en']).some(function (
+          tag
+        ) {
+          return /^zh\b/i.test(tag);
+        });
+        location.replace(wantsChinese ? './zh/' : './en/');
+      })();
+    </script>
+    <style>
+      body {
+        margin: 0;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        background: #f3f3ea;
+        color: #23201c;
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      a {
+        color: #855f17;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Redirecting… <a href="./en/">English</a> · <a href="./zh/">中文</a>
+    </p>
+  </body>
+</html>

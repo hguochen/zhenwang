@@ -30,8 +30,17 @@
   --color-paper: #f3f3ea;
   --color-paper-dim: #eae9de;
 
-  --font-display: var(--font-display), Georgia, 'Times New Roman', serif;
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  /*
+   * Cormorant and Inter carry no CJK glyphs, so Chinese resolves by per-glyph
+   * fallback: Latin stays in the brand faces, Chinese drops to the subsetted
+   * Noto CJK shipped with the site (see [locale]/layout.tsx). The system faces
+   * after it are a courtesy for anyone whose browser blocks webfonts.
+   */
+  --font-display: var(--font-cormorant), var(--font-cjk-serif), 'Songti SC',
+    'Noto Serif CJK SC', 'Source Han Serif SC', SimSun, Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), var(--font-cjk-sans), 'PingFang SC', 'Hiragino Sans GB',
+    'Noto Sans CJK SC', 'Source Han Sans SC', 'Microsoft YaHei', ui-sans-serif, system-ui,
+    sans-serif;
 }
 
 @layer base {
