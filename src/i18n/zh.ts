@@ -76,7 +76,7 @@ export const zh: Dictionary = {
     contact: {
       title: '联系我们',
       description:
-        '联系米纳威岩矿板新加坡总代理 ZHEN WANG CONSTRUCTION PTE LTD。电话 +65 9457 8218，邮箱 zhenwang8@hotmail.com。',
+        '联系米纳威岩矿板新加坡总代理 ZHEN WANG CONSTRUCTION PTE LTD。电话 +65 9457 8218，邮箱 shuzhen@zhenwang.org。',
     },
   },
 

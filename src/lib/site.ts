@@ -19,7 +19,7 @@ export const site = {
   url: 'https://hguochen.github.io/zhenwang',
   phone: '+65 9457 8218',
   phoneHref: '+6594578218',
-  email: 'zhenwang8@hotmail.com',
+  email: 'shuzhen@zhenwang.org',
   address: {
     line1: '2 Tao Ching Road, #16-01 Lake Life',
     line2: 'Singapore 618721',
